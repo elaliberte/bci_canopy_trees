@@ -1,0 +1,10 @@
+Column_Name	Data_Type	Unit	Definition
+col	integer	NA	"The 20-m column of the plot in which the tree is located, where 0 is the westmost column."
+row	integer	NA	"The 20-m row of the plot in which the tree is located, where 0 is the southernmost column."
+name	string	NA	A code for the initials of the technician who measured the tree
+date	date	NA	"The date of measurement in 2004-2005 census, as month/day/year"
+p5	integer	NA	"The 5x5m subplot in which the tree is located within the 20x20 m quadrat, where 11 is the southwesternmost 5x5, 14 is the northwesternmost, 41 is the southeasternmost, and 44 is the northeasternmost. The first digit indicates the column, the second indicates the row.  "
+tag	string	NA	The number of the original tag on the tree
+sp	string	NA	"A 6-letter code for the species ID, using the standard Panama ForestGEO codes"
+new.tag	string	NA	"The number of the new tag on the tree, if the old tag was replaced"
+dbh	integer	mm	"Trunk diameter of one of the stems in the 2004-2005 census at 1.3 m height or above buttresses (diameter at breast height), in milimeters"

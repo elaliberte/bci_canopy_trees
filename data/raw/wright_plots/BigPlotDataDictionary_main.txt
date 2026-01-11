@@ -1,0 +1,18 @@
+Column_Name	Data_Type	Unit	Definition
+tag	string	NA	The number of the original tag on the tree
+new.tag	string	NA	"The number of the new tag on the tree, if the old tag was replaced"
+sp	string	NA	"A 6-letter code for the species ID, using the standard Panama ForestGEO codes"
+dbh04	integer	mm	"Trunk diameter in the 2004-2005 census at 1.3 m height or above buttresses (diameter at breast height), in milimeters"
+dbh14	integer	mm	"Trunk diameter in the 2014-2015 census at 1.3 m height or above buttresses (diameter at breast height), in milimeters"
+code04	string	NA	codes for the tree status in the 2004-2005 census
+code14	string	NA	"codes for the tree status in the 2014-2015 census, concatennated together or comma-separated.  Individual codes are defined in the file ""TreeCodeDefinitions.txt"""
+stems04	integer	NA	Number of stems in the 2004-2005 census
+stems14	integer	NA	Number of stems in the 2014-2015 census
+pom04	numeric	m	"Height of measurement of the dbh in the 2004-2005 census, in meters"
+pom14	numeric	m	"Height of measurement of the dbh in the 2014-2015 census, in meters"
+date14	string	NA	"Date of the measurement in 2014-2015, as YYYYMMDD"
+col	integer	NA	"The 20-m column of the plot in which the tree is located, where 0 is the westmost column."
+row	integer	NA	"The 20-m row of the plot in which the tree is located, where 0 is the southernmost column."
+p5	integer	NA	"The 5x5m subplot in which the tree is located within the 20x20 m quadrat, where 11 is the southwesternmost 5x5, 14 is the northwesternmost, 41 is the southeasternmost, and 44 is the northeasternmost. The first digit indicates the column, the second indicates the row.  "
+x	numeric	m	"The local x coordinate of the tree within the 20x20 m quadrat, in meters"
+y	numeric	m	"The local y coordinate of the tree within the 20x20 m quadrat, in meters"

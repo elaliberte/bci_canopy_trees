@@ -1,0 +1,19 @@
+Code	Definition
+B	"Buttressed tree, with buttresses present at 1.3 m, such that the trunk must be measured at a higher point of measurement.  "
+M	Multiple-stemmed
+Q	Trunk broken above 1.3 m
+L	Leaning
+R	Resprout; broken below 1.3 m
+S	Dead trunk still standing
+C	Dead trunk lying on ground
+N	Tree missing and presumed dead
+Abejas	"Aggressive bees in the vicinity of the tree (this is a warning for the census workers, and may  in some cases indicate it was not possible to safely measure the tree)"
+Eliminar	Record marked for elimination
+Eliminado	Record marked for elimination
+P	Tag replaced
+FC	This tree was found in the field with a tag on it but wasn't in the data forms.
+ID	Original species identification needs correction or verification
+map	Original mapping was problematic
+MED	Trees with a measurement at a height other than 1.3 m
+EM	unknown temporary code for reference by census team
+Rein	unknown temporary code for reference by census team

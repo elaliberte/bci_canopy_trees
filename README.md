@@ -8,6 +8,6 @@ The goal is then to compare to our own data on labelled close-up drone photos of
 
 1.  Vásquez, V., K. C. Cushman, P. Ramos, C. Williamson, P. Villareal, L. F. Gomez Correa, and H. C. Muller-Landau. 2023. Barro Colorado Island 50-ha plot crown maps: manually segmented and instance segmented. Smithsonian Tropical Research Institute. Smithsonian Figshare. <https://doi.org/10.25573/data.24784053>
 
-2.  Wright, S. Joseph. 2024. Tree census data for the 25-ha, 10-ha and tower plots on Barro Colorado Island, Panama. Smithsonian Figshare. <https://doi.org/10.25573/data.24531133> (filtered to only consider trees \>20 cm DBH, which are likely to be in the canopy)
+2.  Wright, S. Joseph. 2024. Tree census data for the 25-ha, 10-ha and tower plots on Barro Colorado Island, Panama. Smithsonian Figshare. <https://doi.org/10.25573/data.24531133> (filtered to only consider trees \>20 cm DBH, which are likely to be in the canopy). Full species names were matched to <https://github.com/PanamaForestGEO/Panama_plant_species_lists/blob/master/splists_out/PanamaSpCombined_2025-11-18HM.xlsx>
 
-The species names are all matched to [WCVP](https://powo.science.kew.org/about-wcvp).
+The species names were all matched to [WCVP](https://powo.science.kew.org/about-wcvp).
