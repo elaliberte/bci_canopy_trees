@@ -1,7 +1,8 @@
 library(remotes)
-install_github("yonghah/esri2sf")
+# install_github("yonghah/esri2sf")
 library(esri2sf)
 library(TNRS)
+library(tidyverse)
 
 url <- "https://services3.arcgis.com/c0JB6JJmyYxhWn0X/ArcGIS/rest/services/BCI_wpt_photos_AGOL/FeatureServer/5"
 photos <- esri2sf(url)
@@ -29,10 +30,21 @@ labels_tnrs <- labels %>%
 
 combined <- read_csv('./data/processed/wright_vasquez_combined.csv') %>% 
   left_join(labels_tnrs) %>% 
-  mutate(n_crowns = replace(n_crowns, is.na(n_crowns), 0))
+  rename(n_crowns = n_photos) %>% 
+  mutate(n_crowns = replace(n_crowns, is.na(n_crowns), 0),
+         cusum_rel_abun = cumsum(rel_abun)) %>% 
+  select(c(1, 2, 4, 3))
 
 sum(combined$n_crowns, na.rm = T)
 
 
 write_csv(combined, './data/processed/species_abun_photos.csv')
 
+myplot <- ggplot(combined, aes(x = rel_abun*100, y = n_crowns)) +
+  geom_point() +
+  scale_x_log10()+
+  scale_y_log10()+
+  xlab('Relative abundance (%)') +
+  ylab('Number of labelled crowns')
+myplot
+ggsave('abun_crowns.png')
