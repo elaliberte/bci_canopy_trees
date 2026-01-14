@@ -1,20 +1,27 @@
 library(sf)
 library(tidyverse)
 library(TNRS)
+library(readxl)
 
-vasquez2020 <- read_sf('./data/raw/vasquez_crownmaps/BCI_50ha_2020_08_01_crownmap_improved.shp')
-vasquez2022 <- read_sf('./data/raw/vasquez_crownmaps/BCI_50ha_2022_09_29_crownmap_improved.shp')
+species <- read_excel('./data/raw/panama_sp_list/PanamaSpCombined_2025-11-18HM.xlsx') %>% 
+  select(sp = sp6,
+         accepted_name = Accepted_name)
+
+vasquez2020 <- read_sf('./data/raw/vasquez_crownmaps/BCI_50ha_2020_08_01_crownmap_improved.shp') %>% 
+  left_join(species, by = c('Mnemonic' = 'sp'))
+vasquez2022 <- read_sf('./data/raw/vasquez_crownmaps/BCI_50ha_2022_09_29_crownmap_improved.shp') %>% 
+  left_join(species, by = c('mnemonic' = 'sp'))
 
 vasquez2020trees <- vasquez2020 %>%
   select(tag,
-         scientific_name = Latin,
+         scientific_name = accepted_name,
          crown_area = crownArea) %>%
   filter(!is.na(scientific_name)) %>% 
   st_drop_geometry()
 
 vasquez2022trees <- vasquez2022 %>%
   select(tag,
-         scientific_name = latin,
+         scientific_name = accepted_name,
          crown_area = crown_area) %>%
   filter(!is.na(scientific_name)) %>% 
   st_drop_geometry() %>% 
@@ -44,22 +51,22 @@ vasquez_taxa_wcvp_clean <- vasquez_taxa_wcvp %>%
 
 # join the WCVP names to Vasquez
 vasquez2020trees_wcvp <- vasquez2020trees %>% 
-  right_join(vasquez_taxa_wcvp_clean) %>% 
+  left_join(vasquez_taxa_wcvp_clean) %>% 
   select(wcvp_accepted_name, crown_area) %>% 
   group_by(wcvp_accepted_name) %>% 
-  summarise(crown_area_sum = sum(crown_area)) %>% 
-  mutate(rel_abun = crown_area_sum / sum(crown_area_sum)) %>% 
+  summarise(crown_area_sum = sum(crown_area, na.rm = T)) %>% 
+  mutate(rel_abun = crown_area_sum / sum(crown_area_sum, na.rm = T)) %>% 
   arrange(desc(rel_abun)) %>% 
   select(-crown_area_sum) %>% 
   mutate(dataset = "vasquez2020")
 
 vasquez2022trees_wcvp <- vasquez2022trees %>% 
-  right_join(vasquez_taxa_wcvp_clean) %>% 
+  left_join(vasquez_taxa_wcvp_clean) %>% 
   select(wcvp_accepted_name, crown_area) %>% 
   filter(!is.na(crown_area)) %>% 
   group_by(wcvp_accepted_name) %>% 
-  summarise(crown_area_sum = sum(crown_area)) %>% 
-  mutate(rel_abun = crown_area_sum / sum(crown_area_sum)) %>% 
+  summarise(crown_area_sum = sum(crown_area, na.rm = T)) %>% 
+  mutate(rel_abun = crown_area_sum / sum(crown_area_sum, na.rm = T)) %>% 
   arrange(desc(rel_abun)) %>% 
   select(-crown_area_sum) %>% 
   mutate(dataset = "vasquez2022")

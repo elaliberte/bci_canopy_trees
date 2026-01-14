@@ -30,7 +30,7 @@ labels_tnrs <- labels %>%
 
 combined <- read_csv('./data/processed/wright_vasquez_combined.csv') %>% 
   left_join(labels_tnrs) %>% 
-  rename(n_crowns = n_photos) %>% 
+  rename(n_crowns = n_crowns) %>% 
   mutate(n_crowns = replace(n_crowns, is.na(n_crowns), 0),
          cusum_rel_abun = cumsum(rel_abun)) %>% 
   select(c(1, 2, 4, 3))

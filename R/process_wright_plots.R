@@ -7,27 +7,38 @@ species <- read_excel('./data/raw/panama_sp_list/PanamaSpCombined_2025-11-18HM.x
   select(sp,
          accepted_name = Accepted_name)
 
-species_to_tnrs <- species %>% 
+# get species
+plot10ha_spp <- read_delim('./data/raw/wright_plots/10ha_WorkingDraft_20150304.txt') %>% 
+  select(sp) %>%
+  distinct() %>% 
+  left_join(species) %>% 
+  arrange(accepted_name) %>% 
+  drop_na()
+
+species_to_tnrs <- plot10ha_spp %>% 
   select(-sp) %>% 
   mutate(id = 1:nrow(.)) %>% 
   select(id, accepted_name) %>% 
   as.data.frame()
 
 species_tnrs <- TNRS(species_to_tnrs)
+
 species_tnrs_accepted <- species_tnrs %>% 
   as_tibble() %>% 
-  select(accepted_name = Name_submitted, Accepted_species) %>% 
-  left_join(species) %>% 
-  select(sp, accepted_name = Accepted_species) %>% 
-  distinct()
+  select(Name_submitted, Accepted_species)
+
+plot10ha_spp_accepted <- plot10ha_spp %>% 
+  left_join(species_tnrs_accepted, by = c("accepted_name" = "Name_submitted")) %>% 
+  select(-accepted_name) %>% 
+  rename(accepted_name = Accepted_species)
 
 
 plot10ha <- read_delim('./data/raw/wright_plots/10ha_WorkingDraft_20150304.txt') %>% 
   select(tag,
          sp,
          dbh = dbh14) %>%
-  filter(dbh >= 200) %>% 
-  left_join(species_tnrs_accepted) %>% 
+  left_join(plot10ha_spp_accepted) %>% 
+  filter(dbh >= 300) %>% 
   mutate(basal_area = pi * ((dbh/2)^2)) %>% 
   select(wcvp_accepted_name = accepted_name, basal_area) %>% 
   filter(!is.na(wcvp_accepted_name)) %>% 
@@ -44,8 +55,8 @@ plot25ha <- read_delim('./data/raw/wright_plots/25ha_WorkingDraft_20141001.txt')
          sp,
          dbh = dbh14) %>% 
   mutate(dbh = as.numeric(dbh)) %>% 
-  filter(dbh >= 200) %>% 
-  left_join(species_tnrs_accepted) %>% 
+  left_join(plot10ha_spp_accepted) %>% 
+  filter(dbh >= 300) %>% 
   mutate(basal_area = pi * ((dbh/2)^2)) %>% 
   select(wcvp_accepted_name = accepted_name, basal_area) %>% 
   filter(!is.na(wcvp_accepted_name)) %>% 
@@ -61,8 +72,8 @@ plotava <- read_delim('./data/raw/wright_plots/AVA_WorkingDraft_20150605.txt') %
   select(tag,
          sp,
          dbh = dbh14) %>% 
-  filter(dbh >= 200) %>% 
-  left_join(species_tnrs_accepted) %>% 
+  left_join(plot10ha_spp_accepted) %>%
+  filter(dbh >= 300) %>% 
   mutate(basal_area = pi * ((dbh/2)^2)) %>% 
   select(wcvp_accepted_name = accepted_name, basal_area) %>% 
   filter(!is.na(wcvp_accepted_name)) %>% 
@@ -78,8 +89,8 @@ plotdrayton <- read_delim('./data/raw/wright_plots/Drayton_WorkingDraft_20141107
   select(tag,
          sp,
          dbh = dbh14) %>% 
-  filter(dbh >= 200) %>% 
-  left_join(species_tnrs_accepted) %>% 
+  left_join(plot10ha_spp_accepted) %>% 
+  filter(dbh >= 300) %>% 
   mutate(basal_area = pi * ((dbh/2)^2)) %>% 
   select(wcvp_accepted_name = accepted_name, basal_area) %>% 
   filter(!is.na(wcvp_accepted_name)) %>% 
@@ -95,8 +106,8 @@ plotpearson <- read_delim('./data/raw/wright_plots/Pearson_WorkingDraft_20141107
   select(tag,
          sp,
          dbh = dbh14) %>% 
-  filter(dbh >= 200) %>% 
-  left_join(species_tnrs_accepted) %>% 
+  left_join(plot10ha_spp_accepted) %>% 
+  filter(dbh >= 300) %>% 
   mutate(basal_area = pi * ((dbh/2)^2)) %>% 
   select(wcvp_accepted_name = accepted_name, basal_area) %>% 
   filter(!is.na(wcvp_accepted_name)) %>% 
@@ -112,8 +123,8 @@ plotzetek <- read_delim('./data/raw/wright_plots/Zetek_WorkingDraft_20141107.txt
   select(tag,
          sp,
          dbh = dbh14) %>% 
-  filter(dbh >= 200) %>% 
-  left_join(species_tnrs_accepted) %>% 
+  left_join(plot10ha_spp_accepted) %>% 
+  filter(dbh >= 300) %>% 
   mutate(basal_area = pi * ((dbh/2)^2)) %>% 
   select(wcvp_accepted_name = accepted_name, basal_area) %>% 
   filter(!is.na(wcvp_accepted_name)) %>% 
