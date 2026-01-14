@@ -30,4 +30,4 @@ rasha_clean <- rasha_spp %>%
 abun_table <- read_csv('./data/processed/species_abun_photos.csv') %>% 
   left_join(rasha_clean)
 
-write_csv(abun_table, './data/processed/species_abun_crowns_f1.csv')
+write_csv(abun_table, './data/processed/species_abun_crowns_f1.csv', na = '')
