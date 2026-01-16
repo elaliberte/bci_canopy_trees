@@ -18,7 +18,7 @@ taxa_tnrs <- TNRS(taxa_to_tnrs_df, sources = 'wcvp')
 
 taxa_tnrs_clean <- taxa_tnrs %>% 
   select(gbif_accepted_scientific_name = Name_submitted,
-         wcvp_accepted_name = Accepted_name,
+         wcvp_accepted_scientific_name = Accepted_name,
          taxonomic_rank = Accepted_name_rank,
          wcvp_url = Accepted_name_url,
          source = Source)

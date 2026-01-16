@@ -1,4 +1,4 @@
-taxon_code,gbif_accepted_taxon_id,gbif_accepted_scientific_name,habit,wcvp_accepted_name,taxonomic_rank,wcvp_url,source
+taxon_code,gbif_accepted_taxon_id,gbif_accepted_scientific_name,habit,wcvp_accepted_scientific_name,taxonomic_rank,wcvp_url,source
 Abrus,2943776,Abrus,,Abrus,genus,https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:21549-1,wcvp
 Abuta,7268654,Abuta,,Abuta,genus,https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:26864-1,wcvp
 Abuta racemosa-ABUTRA-ABUR,7349979,Abuta racemosa,Climbing,Abuta racemosa,species,https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:580077-1,wcvp
